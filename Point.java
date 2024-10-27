@@ -1,5 +1,7 @@
 import java.util.Comparator;
 
+import edu.princeton.cs.algs4.StdDraw;
+
 public class Point implements Comparable<Point> {
     
     private int x;
@@ -67,7 +69,7 @@ public class Point implements Comparable<Point> {
 
     // draws the line segment from this point to that point                       
     public void drawTo(Point that) {
-
+        StdDraw.line(x, y, that.x, that.y);
     }   
 
     // string representation              
