@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
+//note to self: implement corner cases
+
 public class BruteCollinearPoints {
 
     private int segments = 0;
@@ -35,7 +37,7 @@ public class BruteCollinearPoints {
     
     // the line segments
     public LineSegment[] segments() {
-        
+
         listedLines = new LineSegment[lineSegment.size()];
         for (int i = 0; i<lineSegment.size(); i++) {
             listedLines[i] = lineSegment.get(i);
