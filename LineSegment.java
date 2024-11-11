@@ -17,6 +17,6 @@ public class LineSegment {
     }       
     // string representation                 
     public String toString() {
-
+        return "hi2";
     }                
 }
