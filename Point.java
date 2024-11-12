@@ -8,25 +8,27 @@ public class Point implements Comparable<Point> {
     private int y;
 
     // constructs the point (x, y)
-    public Point(int x1, int y2) {
-        x = x1;
-        y = y2;
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     // compare two points by y-coordinates, breaking ties by x-coordinates
     public int compareTo(Point that) {
-        if (y > that.y) {
+        if (this.y > that.y) {
             return 1;
-        }
-        if (y < that.y) {
+        } 
+        if (this.y < that.y) {
             return -1;
-        }
-        if (x < that.x) {
-            return -1;
-        }
-        if (x > that.x) {
+        } 
+
+        if (this.x > that.x) {
             return 1;
-        }
+        } 
+        if (this.x < that.x) {
+            return -1;
+        } 
+
         return 0;
     }
 
@@ -36,14 +38,14 @@ public class Point implements Comparable<Point> {
         if (compareTo(that) == 0) {
             return Double.NEGATIVE_INFINITY;
         }
-        if (y-that.y == 0) {
-            return 0;
+        if (this.y-that.y == 0) {
+            return +0.0;
         }
-        if (x-that.x == 0) {
+        if (this.x-that.x == 0) {
             return Double.POSITIVE_INFINITY;
         }
 
-        return (y-that.y)/(x-that.x);
+        return (double)(this.y-that.y)/(this.x-that.x);
     
     }
 
@@ -64,16 +66,16 @@ public class Point implements Comparable<Point> {
 
     // draws this point
     public void draw() {
-        
+        StdDraw.point(x, y);
     }    
 
     // draws the line segment from this point to that point                       
     public void drawTo(Point that) {
-        StdDraw.line(x, y, that.x, that.y);
+        StdDraw.line(this.x, this.y, that.x, that.y);
     }   
 
     // string representation              
     public String toString() {
-        return "hi";
+        return "(" + this.x + " " + this.y + ")";
     } 
 }

@@ -12,36 +12,43 @@ public class BruteCollinearPoints {
     private int segments = 0;
     private ArrayList<LineSegment> lineSegment;
     private LineSegment[] listedLines;
+    private Point[] points2;
+
     // finds all line segments containing 4 points
     public BruteCollinearPoints(Point[] points) {
+
+        
+
         if (points == null) {
             throw new IllegalArgumentException();
         }
 
-        for (int i = 0; i<points.length; i++) {
-            if (points[i] == null) {
+        points2 = points.clone();
+
+        for (int i = 0; i<points2.length; i++) {
+            if (points2[i] == null) {
                 throw new IllegalArgumentException();
             }
             for (int j = 0; j<i; j++) {
-                if (points[i].compareTo(points[j]) == 0) {
+                if (points2[i].compareTo(points2[j]) == 0) {
                     throw new IllegalArgumentException();
                 }
             }
         }
 
-        Arrays.sort(points);
+        Arrays.sort(points2);
 
 
 
         lineSegment = new ArrayList<LineSegment>();
-        for (int i = 0; i<points.length-3; i++) {
-            for (int j = i+1; j<points.length-2; j++) {
-                for (int k = j+1; k<points.length-1; k++) {
-                    for (int m = k+1; m<points.length; m++) {
+        for (int i = 0; i<points2.length-3; i++) {
+            for (int j = i+1; j<points2.length-2; j++) {
+                for (int k = j+1; k<points2.length-1; k++) {
+                    for (int m = k+1; m<points2.length; m++) {
 
-                        if (points[i].slopeTo(points[j]) == points[j].slopeTo(points[k]) && points[j].slopeTo(points[k]) == points[k].slopeTo(points[m])) {
+                        if (points2[i].slopeTo(points2[j]) == points2[j].slopeTo(points2[k]) && points2[j].slopeTo(points2[k]) == points2[k].slopeTo(points2[m])) {
                             
-                            lineSegment.add(new LineSegment(points[i], points[m])); // list a possible slope connection
+                            lineSegment.add(new LineSegment(points2[i], points2[m])); // list a possible slope connection
                             segments++;
                         }
 
