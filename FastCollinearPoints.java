@@ -14,6 +14,7 @@ public class FastCollinearPoints {
 
     // finds all line segments containing 4 or more points
     public FastCollinearPoints(Point[] points) {
+        System.out.println("hi");
         if (points == null) {
             throw new IllegalArgumentException();
         }
@@ -33,34 +34,82 @@ public class FastCollinearPoints {
         Arrays.sort(naturalOrder);
         int n = points.length;
         lineList = new ArrayList<>();
+        System.out.println("array length = " + n);
 
 
-
-        for (int p = 0; p<n; p++) {
+        for (int p = 0; p<n-1; p++) {
             
 
             Point[] dupeOfNaturalOrder = naturalOrder.clone();
             Point pPoint = points[p];
-            Arrays.sort(dupeOfNaturalOrder, 0, n, pPoint.slopeOrder()); //sort based on slope order, ALLEGEDLY
-            int counter = 1;
+            Arrays.sort(dupeOfNaturalOrder, pPoint.slopeOrder()); //sort based on slope order, ALLEGEDLY
+            for (int i = 0; i<dupeOfNaturalOrder.length; i++) {
+                System.out.println("the point" +dupeOfNaturalOrder[i] + " and slope is " + dupeOfNaturalOrder[p].slopeTo(dupeOfNaturalOrder[i]));
+            }
+            
+
+            int first = p;
+            int last = p+1;
+            int counter = 0;
+            double slope = dupeOfNaturalOrder[p].slopeTo(dupeOfNaturalOrder[p+1]);
+            System.out.println("starting slope is " + slope + " and first = " + first + " and last = " + last);
+            while (last != n) {
+
+                if (slope == dupeOfNaturalOrder[first].slopeTo(dupeOfNaturalOrder[last])) {
+                    System.out.println("index of last after equal slope " + last + ", counter is " + counter);
+                    counter++;
+                    last++;
+                    System.out.println("after equal, last is " + last + " and counter is " + counter);
+                    
+                } else { //(slope != dupe[first].slopeTo(dupe[last]))
+
+                    if (counter >= 3) {//implement code for duplicate lines
+                        lineList.add(new LineSegment(dupeOfNaturalOrder[p], dupeOfNaturalOrder[last-1])); //if there is 4 consecutive or more links, add to lineList list of segments
+                        System.out.println("added a line between point " + dupeOfNaturalOrder[p] + " and point " + dupeOfNaturalOrder[last-1] + " with slope " + slope + " with " + (counter+1) + " consecutive elements");
+                        numberOfSegments++;
+                    }
+                    counter = 1;
+                    slope = dupeOfNaturalOrder[first].slopeTo(dupeOfNaturalOrder[last]);
+                    last++;
+                    System.out.println("index of last: " + last);
+                    
+                }
+
+            }
+
+            
+
+
+
+
+
+
+
+            /*int counter = 0;
             double slope = 999999976; //set a "undefined" slope and hopefully the grader doesnt catch it hahahahahahaaha
             for (int q = p+1; q<n; q++) { //all index of sorted array AFTER point p, hopefully in slope order, i think smallest slope to highest? (counterclockwise sort)
 
 
+                
                 if (slope == dupeOfNaturalOrder[p].slopeTo(dupeOfNaturalOrder[q])) {
                     counter++; //increment numbers of consecutive link
+                    System.out.println("slope = natural order" + dupeOfNaturalOrder[p].slopeTo(dupeOfNaturalOrder[q]));
                 } else {
 
+                    
                     if (counter>=4) {
-                        lineList.add(new LineSegment(dupeOfNaturalOrder[p], dupeOfNaturalOrder[q])); //if there is 4 consecutive or more links, add to lineList list of segments
+                        lineList.add(new LineSegment(dupeOfNaturalOrder[p], dupeOfNaturalOrder[q-1])); //if there is 4 consecutive or more links, add to lineList list of segments
                         numberOfSegments++;
+                        System.out.println("added a new line" + dupeOfNaturalOrder[p].slopeTo(dupeOfNaturalOrder[q]));
                     }
 
                     slope = dupeOfNaturalOrder[p].slopeTo(dupeOfNaturalOrder[q]);  //set slope equal to the new slope if different slope
                     counter = 1;
                 }
 
-            }
+
+
+            }*/
 
         }
 
@@ -83,7 +132,7 @@ public class FastCollinearPoints {
     public static void main(String[] args) {
 
     // read the n points from a file
-    In in = new In("collinear/input6.txt");
+    In in = new In("collinear/input8.txt");
     int n = in.readInt();
     Point[] points = new Point[n];
     for (int i = 0; i < n; i++) {
