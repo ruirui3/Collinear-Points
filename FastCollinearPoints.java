@@ -29,28 +29,35 @@ public class FastCollinearPoints {
             }
         }
 
+        Point[] naturalOrder = points.clone();
+        Arrays.sort(naturalOrder);
         int n = points.length;
         lineList = new ArrayList<>();
 
-        for (int p = 0; p<n-1; p++) {
+
+
+        for (int p = 0; p<n; p++) {
             
+
+            Point[] dupeOfNaturalOrder = naturalOrder.clone();
             Point pPoint = points[p];
-            Arrays.sort(points, 0, n, pPoint.slopeOrder()); //sort based on slope order, ALLEGEDLY
-            int counter = 0;
+            Arrays.sort(dupeOfNaturalOrder, 0, n, pPoint.slopeOrder()); //sort based on slope order, ALLEGEDLY
+            int counter = 1;
             double slope = 999999976; //set a "undefined" slope and hopefully the grader doesnt catch it hahahahahahaaha
             for (int q = p+1; q<n; q++) { //all index of sorted array AFTER point p, hopefully in slope order, i think smallest slope to highest? (counterclockwise sort)
 
 
-                if (slope == points[p].slopeTo(points[q])) {
+                if (slope == dupeOfNaturalOrder[p].slopeTo(dupeOfNaturalOrder[q])) {
                     counter++; //increment numbers of consecutive link
                 } else {
 
                     if (counter>=4) {
-                        lineList.add(new LineSegment(points[p], points[q])); //if there is 4 consecutive or more links, add to lineList list of segments
+                        lineList.add(new LineSegment(dupeOfNaturalOrder[p], dupeOfNaturalOrder[q])); //if there is 4 consecutive or more links, add to lineList list of segments
                         numberOfSegments++;
                     }
 
-                    slope = points[p].slopeTo(points[q]);  //set slope equal to the new slope if different slope
+                    slope = dupeOfNaturalOrder[p].slopeTo(dupeOfNaturalOrder[q]);  //set slope equal to the new slope if different slope
+                    counter = 1;
                 }
 
             }
@@ -76,7 +83,7 @@ public class FastCollinearPoints {
     public static void main(String[] args) {
 
     // read the n points from a file
-    In in = new In(args[0]);
+    In in = new In("collinear/input6.txt");
     int n = in.readInt();
     Point[] points = new Point[n];
     for (int i = 0; i < n; i++) {
