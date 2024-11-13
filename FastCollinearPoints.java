@@ -35,16 +35,38 @@ public class FastCollinearPoints {
         int n = points.length;
         lineList = new ArrayList<>();
         System.out.println("array length = " + n);
-
+        System.out.println("the natural order below this line");
+        for (int i = 0; i<naturalOrder.length; i++) {
+            System.out.print(naturalOrder[i] + ", ");
+        }
+        System.out.println();
 
         for (int p = 0; p<n-1; p++) {
             
 
             Point[] dupeOfNaturalOrder = naturalOrder.clone();
             Point pPoint = points[p];
-            Arrays.sort(dupeOfNaturalOrder, pPoint.slopeOrder()); //sort based on slope order, ALLEGEDLY
-            for (int i = p; i<dupeOfNaturalOrder.length; i++) {
-                System.out.println("the point" +dupeOfNaturalOrder[i] + " and slope is " + dupeOfNaturalOrder[p].slopeTo(dupeOfNaturalOrder[i]));
+            System.out.println("pivot point is " + pPoint);
+            Arrays.sort(dupeOfNaturalOrder);
+            Arrays.sort(dupeOfNaturalOrder, 0, n, pPoint.slopeOrder()); //sort based on slope order, ALLEGEDLY
+
+            //shifting
+            //pivot = p
+            /*Point pivot = dupeOfNaturalOrder[p];
+            for (int i = p; i>=1; i--) {
+                dupeOfNaturalOrder[i] = dupeOfNaturalOrder[i-1];
+            }
+            dupeOfNaturalOrder[0] = pivot;
+
+            System.out.println("final slope order: \n");
+            for (int i = 0; i<dupeOfNaturalOrder.length; i++) {
+                System.out.print(dupeOfNaturalOrder[i] + ", ");
+            }
+            System.out.println();
+            */
+
+            for (int i = 0; i<dupeOfNaturalOrder.length; i++) {
+                System.out.println("the point" + dupeOfNaturalOrder[i] + " and slope is " + dupeOfNaturalOrder[p].slopeTo(dupeOfNaturalOrder[i]));
             }
             
 
