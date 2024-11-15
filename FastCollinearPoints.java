@@ -82,14 +82,7 @@ public class FastCollinearPoints {
                 // (slope != dupe[first].slopeTo(dupe[last]))
                 
                 if (last - first >= 3) {// implement code for duplicate lines
-                    lineList.add(new LineSegment(naturalOrder[p], dupeOfNaturalOrder[last - 1])); // if there is 4
-                                                                                                  // consecutive or more
-                                                                                                  // links, add to
-                                                                                                  // lineList
-                                                                                                  // list of segments
-                    // System.out.println("added a line between point " + dupeOfNaturalOrder[p] + "
-                    // and point " + dupeOfNaturalOrder[last-1] + " with slope " + slope + " with "
-                    // + (counter+1) + " consecutive elements");
+                    lineList.add(new LineSegment(naturalOrder[p], dupeOfNaturalOrder[last - 1]));
                     numberOfSegments++;
                 }
                 first = last;
@@ -100,41 +93,7 @@ public class FastCollinearPoints {
 
         // System.out.println("loop for p = " + p + " done");
 
-        /*
-         * int counter = 0;
-         * double slope = 999999976; //set a "undefined" slope and hopefully the grader
-         * doesnt catch it hahahahahahaaha
-         * for (int q = p+1; q<n; q++) { //all index of sorted array AFTER point p,
-         * hopefully in slope order, i think smallest slope to highest?
-         * (counterclockwise sort)
-         * 
-         * 
-         * 
-         * if (slope == dupeOfNaturalOrder[p].slopeTo(dupeOfNaturalOrder[q])) {
-         * counter++; //increment numbers of consecutive link
-         * System.out.println("slope = natural order" +
-         * dupeOfNaturalOrder[p].slopeTo(dupeOfNaturalOrder[q]));
-         * } else {
-         * 
-         * 
-         * if (counter>=4) {
-         * lineList.add(new LineSegment(dupeOfNaturalOrder[p],
-         * dupeOfNaturalOrder[q-1])); //if there is 4 consecutive or more links, add to
-         * lineList list of segments
-         * numberOfSegments++;
-         * System.out.println("added a new line" +
-         * dupeOfNaturalOrder[p].slopeTo(dupeOfNaturalOrder[q]));
-         * }
-         * 
-         * slope = dupeOfNaturalOrder[p].slopeTo(dupeOfNaturalOrder[q]); //set slope
-         * equal to the new slope if different slope
-         * counter = 1;
-         * }
-         * 
-         * 
-         * 
-         * }
-         */
+        
 
     }
 
