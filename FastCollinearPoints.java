@@ -32,63 +32,33 @@ public class FastCollinearPoints {
         Arrays.sort(naturalOrder);
         int n = points.length;
         lineList = new ArrayList<>();
-        // System.out.println("array length = " + n);
-        System.out.println("the natural order below this line");
-        for (int i = 0; i < naturalOrder.length; i++) {
-            System.out.print(naturalOrder[i] + ", ");
-        }
-        System.out.println();
 
-        for (int p = 0; p < n - 1; p++) {
+        for (int p = 0; p < n - 3; p++) {
 
             Point[] dupeOfNaturalOrder = naturalOrder.clone();
+
+            Arrays.sort(dupeOfNaturalOrder, dupeOfNaturalOrder[p].slopeOrder());
+
             
-            Arrays.sort(dupeOfNaturalOrder, dupeOfNaturalOrder[p].slopeOrder()); // sort based on slope order, ALLEGEDLY
+            
+            int first = 1;
 
-            System.out.println("final slope order: \n");
-            for (int i = 0; i < dupeOfNaturalOrder.length; i++) {
-                System.out.print(dupeOfNaturalOrder[i] + ", ");
-            }
-            System.out.println();
+            for (int last = 2; last < dupeOfNaturalOrder.length; last++) {
 
-            System.out.println("expect slope to be -Infinity: " + naturalOrder[p].slopeTo(dupeOfNaturalOrder[0]));
+                while (last < n && Double.compare(dupeOfNaturalOrder[0].slopeTo(dupeOfNaturalOrder[first]), dupeOfNaturalOrder[first].slopeTo(dupeOfNaturalOrder[last])) == 0) {
 
-            for (int i = 0; i < dupeOfNaturalOrder.length; i++) {
-                System.out.println("the point" + dupeOfNaturalOrder[i] + " and slope is "
-                        + naturalOrder[p].slopeTo(dupeOfNaturalOrder[i]));
-            }
-
-            int first = p + 1;
-
-
-            for (int last = p + 2; last < dupeOfNaturalOrder.length; last++) {
-                // double slope = naturalOrder[p].slopeTo(dupeOfNaturalOrder[p + 1]);
-                // System.out.println("starting slope is " + slope + " and first = " + first + "
-                // and last = " + last);
-                while (last < n && naturalOrder[p].slopeTo(dupeOfNaturalOrder[first]) == dupeOfNaturalOrder[first]
-                        .slopeTo(dupeOfNaturalOrder[last])) {
-
-                    // System.out.println("index of last after equal slope " + last + ", counter is
-                    // " + counter);
                     last++;
-                    // System.out.println("after equal, last is " + last + " and counter is " +
-                    // counter);
+
                 }
-                // (slope != dupe[first].slopeTo(dupe[last]))
-                
-                if (last - first >= 3) {// implement code for duplicate lines
+
+                if (last - first >= 3 && dupeOfNaturalOrder[0].compareTo(dupeOfNaturalOrder[first]) < 0) {// implement code for duplicate lines ASFDIUH
                     lineList.add(new LineSegment(naturalOrder[p], dupeOfNaturalOrder[last - 1]));
                     numberOfSegments++;
                 }
                 first = last;
             }
-            // System.out.println("index of last: " + last);
 
         }
-
-        // System.out.println("loop for p = " + p + " done");
-
-        
 
     }
 
@@ -109,7 +79,7 @@ public class FastCollinearPoints {
     public static void main(String[] args) {
 
         // read the n points from a file
-        In in = new In("collinear/input20.txt");
+        In in = new In("collinear/rs1423.txt");
         int n = in.readInt();
         Point[] points = new Point[n];
         for (int i = 0; i < n; i++) {
