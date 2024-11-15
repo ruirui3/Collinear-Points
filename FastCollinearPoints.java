@@ -12,7 +12,8 @@ public class FastCollinearPoints {
 
     // finds all line segments containing 4 or more points
     public FastCollinearPoints(Point[] points) {
-        // System.out.println("hi");
+        
+        //check corner cases
         if (points == null) {
             throw new IllegalArgumentException();
         }
@@ -33,33 +34,31 @@ public class FastCollinearPoints {
         int n = points.length;
         lineList = new ArrayList<>();
 
-        for (int p = 0; p < n - 3; p++) {
+        for (int p = 0; p < n - 3; p++) { //check if this could be a problem if size -> changed p classfication
 
             Point[] dupeOfNaturalOrder = naturalOrder.clone();
 
             Arrays.sort(dupeOfNaturalOrder, dupeOfNaturalOrder[p].slopeOrder());
 
-            
-            
             int first = 1;
 
             for (int last = 2; last < dupeOfNaturalOrder.length; last++) {
 
-                while (last < n && Double.compare(dupeOfNaturalOrder[0].slopeTo(dupeOfNaturalOrder[first]), dupeOfNaturalOrder[first].slopeTo(dupeOfNaturalOrder[last])) == 0) {
-
-                    last++;
+                while (last < n && Double.compare(dupeOfNaturalOrder[0].slopeTo(dupeOfNaturalOrder[first]), dupeOfNaturalOrder[first].slopeTo(dupeOfNaturalOrder[last])) == 0)  { //check max amount of consecutive. 
+                    
+                    last++; //note: it effects the loop occurence
 
                 }
 
-                if (last - first >= 3 && dupeOfNaturalOrder[0].compareTo(dupeOfNaturalOrder[first]) < 0) {// implement code for duplicate lines ASFDIUH
+                if (last - first >= 3 && dupeOfNaturalOrder[0].compareTo(dupeOfNaturalOrder[first]) < 0) {// last - first exemplifies the counter. default is pos 2 - pos 1, which is 1, therefore initial counter is 1. compare checks if there was a line before
                     lineList.add(new LineSegment(naturalOrder[p], dupeOfNaturalOrder[last - 1]));
-                    numberOfSegments++;
+                    
                 }
-                first = last;
+                first = last; //find next
             }
-
+            
         }
-
+        numberOfSegments = lineList.size();
     }
 
     // the number of line segments
