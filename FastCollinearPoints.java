@@ -42,13 +42,8 @@ public class FastCollinearPoints {
         for (int p = 0; p < n - 1; p++) {
 
             Point[] dupeOfNaturalOrder = naturalOrder.clone();
-            Point pPoint = dupeOfNaturalOrder[p];
-            // System.out.println("pivot point is " + pPoint);
-
-            Arrays.sort(dupeOfNaturalOrder, pPoint.slopeOrder()); // sort based on slope order, ALLEGEDLY
-
-            // shifting
-            // pivot = p
+            
+            Arrays.sort(dupeOfNaturalOrder, dupeOfNaturalOrder[p].slopeOrder()); // sort based on slope order, ALLEGEDLY
 
             System.out.println("final slope order: \n");
             for (int i = 0; i < dupeOfNaturalOrder.length; i++) {
