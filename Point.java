@@ -39,7 +39,7 @@ public class Point implements Comparable<Point> {
             return Double.NEGATIVE_INFINITY;
         }
         if (this.y-that.y == 0) {
-            return +0.0;
+            return +0.0d;
         }
         if (this.x-that.x == 0) {
             return Double.POSITIVE_INFINITY;

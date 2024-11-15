@@ -47,8 +47,8 @@ public class BruteCollinearPoints {
                     for (int m = k+1; m<points2.length; m++) {
 
                         if (points2[i].slopeTo(points2[j]) == points2[j].slopeTo(points2[k]) && points2[j].slopeTo(points2[k]) == points2[k].slopeTo(points2[m])) {
-                            System.out.println("connecting points" + points2[i] + " and " + points2[m] + " with a slope of " + (points2[j].slopeTo(points2[k])));
-                            System.out.println("in the loop where i = " + i);
+                            //System.out.println("connecting points" + points2[i] + " and " + points2[m] + " with a slope of " + (points2[j].slopeTo(points2[k])));
+                            //System.out.println("in the loop where i = " + i);
                             lineSegment.add(new LineSegment(points2[i], points2[m])); // list a possible slope connection
                             segments++;
                         }
