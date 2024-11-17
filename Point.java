@@ -2,6 +2,13 @@ import java.util.Comparator;
 
 import edu.princeton.cs.algs4.StdDraw;
 
+/**
+ * @author Rui ZHao attests that this code is their original work and was written in compliance with the class Academic Integrity and Collaboration Policy found in the syllabus. 
+ */
+
+//nothing hard about this, other than the fact that there are +0.0s, -inf, and +inf. I guess 0 != +0.0. Also I think the slopeOrder compare function was hard because it was a new logic I had to use. 
+
+
 public class Point implements Comparable<Point> {
     
     private int x;

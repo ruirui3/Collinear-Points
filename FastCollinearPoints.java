@@ -1,3 +1,13 @@
+/**
+ * @author Rui Zhao attests that this code is their original work and was written in compliance with the class Academic Integrity and Collaboration Policy found in the syllabus. 
+ */
+
+//The hardest part about this project was definitely figuring out the logic and the pattern of the sorting array. By recalibrating my thinking and drawing 
+//logical diagrams out, I was finally able to navigate my problem. The main issue was with the Point[] lists I am using, often getting mixed up with one another
+//which resulted in false points being connected to one another. Also the index was a common problem because I kept getting indexoutofbounds errors, but it was fixed after 
+//utilizing the Debug feature. 
+
+
 import java.util.ArrayList;
 import java.util.Arrays;
 

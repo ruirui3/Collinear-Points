@@ -5,6 +5,16 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
+
+/**
+ * @author Rui Zhao attests that this code is their original work and was written in compliance with the class Academic Integrity and Collaboration Policy found in the syllabus. 
+ */
+
+
+ //Ok to be honest bruteforce was kind of easy but I think the hardest part was finding the correct logic of the if (logic). It wasn't that hard to find out but I guess I didn't like typing it out. 
+
+
+
 //note to self: implement corner cases
 
 public class BruteCollinearPoints {
